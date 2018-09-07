@@ -7,9 +7,13 @@
 //
 
 #include <iostream>
+#include <opencv2/opencv.hpp>
+using namespace cv;                             //包含cv命名空间
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main()
+{
+    Mat srcImage = imread("/Users/wangannan/Desktop/IMG_6064.jpg");             // Load the image
+    imshow("Original Image", srcImage);         //Show the image, with the window name ""Original Image
+    waitKey(0);                                 // Wait for any key to be pressed
     return 0;
 }
