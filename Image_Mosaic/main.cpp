@@ -18,7 +18,7 @@ int main()
         printf("Can't read the file, please check the path and try again.\n");
         return -1;
     }
-    namedWindow("Original Image");              // name a window and decide the window size
+    namedWindow("Original Image", WINDOW_NORMAL);              // name a window and decide the window size
     imshow("Original Image", srcImage);         //Show the image, with the window name "Original Image"
     
     imwrite("Result.jpg", srcImage);            // write an image as an output file
@@ -28,7 +28,7 @@ int main()
         printf("Can't read the file, please check the path and try again.\n");
         return -1;
     }
-    namedWindow("Result Image");
+    namedWindow("Result Image", WINDOW_NORMAL);
     imshow("Result Image", resultImage);
     
     waitKey(0);                                 // Wait for any key to be pressed to exit
