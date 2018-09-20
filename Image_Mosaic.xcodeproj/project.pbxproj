@@ -170,6 +170,7 @@
 		759331E02142CC240075496E = {
 			isa = PBXGroup;
 			children = (
+				7593324A21541B790075496E /* IMG */,
 				759331F32142CC300075496E /* lib */,
 				759331EB2142CC240075496E /* Image_Mosaic */,
 				759331EA2142CC240075496E /* Products */,
@@ -240,6 +241,29 @@
 				7593320D2142CC800075496E /* libopencv_xphoto.3.4.2.dylib */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		7593324A21541B790075496E /* IMG */ = {
+			isa = PBXGroup;
+			children = (
+				7593324C21541B900075496E /* Input */,
+				7593324B21541B870075496E /* Output */,
+			);
+			path = IMG;
+			sourceTree = "<group>";
+		};
+		7593324B21541B870075496E /* Output */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Output;
+			sourceTree = "<group>";
+		};
+		7593324C21541B900075496E /* Input */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
