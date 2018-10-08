@@ -16,6 +16,12 @@ int readImgName(String readpath, String defaultpath)
     dir = opendir(path.c_str());
     vector<string> imgs;
     cout << "file name" << endl;
+    if ((ptr = readdir(dir)) == NULL)
+    {
+        printf("Nothing in this directory!\n");
+        return -1;
+    }
+    
     while ((ptr = readdir(dir)) != NULL)
     {
         //skip "." and ".."
