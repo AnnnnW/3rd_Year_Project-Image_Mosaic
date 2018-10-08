@@ -14,7 +14,7 @@ int readImgName(String readpath, String defaultpath)
     DIR *dir;
     string path = readpath + "Resource";
     dir = opendir(path.c_str());
-    vector<string> imgs;
+    vector<string> tiles;
     cout << "file name" << endl;
     if ((ptr = readdir(dir)) == NULL)
     {
@@ -27,17 +27,17 @@ int readImgName(String readpath, String defaultpath)
         //skip "." and ".."
         if (ptr -> d_name[0] == '.')
             continue;
-        imgs.push_back(ptr -> d_name); //add the d_name to the end of the vector
+        tiles.push_back(ptr -> d_name); //add the d_name to the end of the vector
     }
     
     ofstream outfile;
     outfile.open(defaultpath + "data.csv");
     
-    for (int i = 1; i < imgs.size(); i++)
+    for (int i = 1; i < tiles.size(); i++)
     {
         if (outfile.is_open())
         {
-            outfile << imgs[i] << endl;
+            outfile << tiles[i] << endl;
         } //if
         else
         {

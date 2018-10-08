@@ -53,7 +53,7 @@
 		759332492142CC840075496E /* libopencv_line_descriptor.3.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7593321E2142CC830075496E /* libopencv_line_descriptor.3.4.2.dylib */; };
 		75C8A47B216B766500B1E995 /* ImageAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A479216B766500B1E995 /* ImageAnalysis.cpp */; };
 		75C8A47E216B7F0800B1E995 /* ImageCutter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A47C216B7F0800B1E995 /* ImageCutter.cpp */; };
-		75C8A481216B7F1D00B1E995 /* Tailer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A47F216B7F1D00B1E995 /* Tailer.cpp */; };
+		75EFCF8E216BA93800436CFC /* Tiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75EFCF8C216BA93800436CFC /* Tiler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,8 +118,8 @@
 		75C8A47A216B766500B1E995 /* ImageAnalysis.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageAnalysis.hpp; sourceTree = "<group>"; };
 		75C8A47C216B7F0800B1E995 /* ImageCutter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageCutter.cpp; sourceTree = "<group>"; };
 		75C8A47D216B7F0800B1E995 /* ImageCutter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageCutter.hpp; sourceTree = "<group>"; };
-		75C8A47F216B7F1D00B1E995 /* Tailer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tailer.cpp; sourceTree = "<group>"; };
-		75C8A480216B7F1D00B1E995 /* Tailer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tailer.hpp; sourceTree = "<group>"; };
+		75EFCF8C216BA93800436CFC /* Tiler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tiler.cpp; sourceTree = "<group>"; };
+		75EFCF8D216BA93800436CFC /* Tiler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tiler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,8 +202,8 @@
 				75C8A47A216B766500B1E995 /* ImageAnalysis.hpp */,
 				75C8A47C216B7F0800B1E995 /* ImageCutter.cpp */,
 				75C8A47D216B7F0800B1E995 /* ImageCutter.hpp */,
-				75C8A47F216B7F1D00B1E995 /* Tailer.cpp */,
-				75C8A480216B7F1D00B1E995 /* Tailer.hpp */,
+				75EFCF8C216BA93800436CFC /* Tiler.cpp */,
+				75EFCF8D216BA93800436CFC /* Tiler.hpp */,
 			);
 			path = Image_Mosaic;
 			sourceTree = "<group>";
@@ -339,7 +339,7 @@
 			files = (
 				759331ED2142CC240075496E /* main.cpp in Sources */,
 				75C8A47E216B7F0800B1E995 /* ImageCutter.cpp in Sources */,
-				75C8A481216B7F1D00B1E995 /* Tailer.cpp in Sources */,
+				75EFCF8E216BA93800436CFC /* Tiler.cpp in Sources */,
 				75C8A47B216B766500B1E995 /* ImageAnalysis.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
