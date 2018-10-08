@@ -46,6 +46,7 @@ int main()
     
     //read the image name and output a file
     readImgName(readpath, defaultpath);
+    
     waitKey(0);                                 // Wait for any key to be pressed to exit
     return 0;
 }
