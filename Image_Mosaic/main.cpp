@@ -12,6 +12,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "ImageAnalysis.hpp"
+#include "ImageCutter.hpp"
 
 using namespace cv;                             //包含cv命名空间
 using namespace std;
@@ -22,15 +23,17 @@ String savepath = defaultpath + "Output/";
 
 int main()
 {
-    Mat srcImage = imread(readpath + "testing_image.jpg");             // Load the image
+    Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
     Mat tempImage;
-    if (!srcImage.data)
+    if (!targetImage.data)
     {
         printf("Can't read the file, please check the path and try again.\n");
         return -1;
     }
     namedWindow("Original Image", WINDOW_AUTOSIZE);              // name a window and decide the window size
-    imshow("Original Image", srcImage);         //Show the image, with the window name "Original Image"
+    imshow("Original Image", targetImage);         //Show the image, with the window name "Original Image"
+    
+    ImageCutter(targetImage);
     
 //    resize(srcImage,tempImage,Size(100,100),0,0,INTER_LINEAR);      //resize the srcimage to a certain fix size 100 * 100
 //
