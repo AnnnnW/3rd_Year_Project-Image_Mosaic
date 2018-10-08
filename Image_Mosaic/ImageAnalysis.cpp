@@ -46,5 +46,6 @@ int readImgName(String readpath, String defaultpath)
     } //for
     outfile.close();
     closedir(dir);
+    cout << "Data.csv file has successfully saved." << endl;
     return 0;
 }

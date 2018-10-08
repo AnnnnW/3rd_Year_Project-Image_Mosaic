@@ -54,7 +54,6 @@
 		75C8A47B216B766500B1E995 /* ImageAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A479216B766500B1E995 /* ImageAnalysis.cpp */; };
 		75C8A47E216B7F0800B1E995 /* ImageCutter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A47C216B7F0800B1E995 /* ImageCutter.cpp */; };
 		75C8A481216B7F1D00B1E995 /* Tailer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75C8A47F216B7F1D00B1E995 /* Tailer.cpp */; };
-		75E398AF21591F0D0044FA93 /* Resize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75E398AD21591F0D0044FA93 /* Resize.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,8 +120,6 @@
 		75C8A47D216B7F0800B1E995 /* ImageCutter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageCutter.hpp; sourceTree = "<group>"; };
 		75C8A47F216B7F1D00B1E995 /* Tailer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tailer.cpp; sourceTree = "<group>"; };
 		75C8A480216B7F1D00B1E995 /* Tailer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tailer.hpp; sourceTree = "<group>"; };
-		75E398AD21591F0D0044FA93 /* Resize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Resize.cpp; sourceTree = "<group>"; };
-		75E398AE21591F0D0044FA93 /* Resize.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Resize.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,8 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				759331EC2142CC240075496E /* main.cpp */,
-				75E398AD21591F0D0044FA93 /* Resize.cpp */,
-				75E398AE21591F0D0044FA93 /* Resize.hpp */,
 				75C8A479216B766500B1E995 /* ImageAnalysis.cpp */,
 				75C8A47A216B766500B1E995 /* ImageAnalysis.hpp */,
 				75C8A47C216B7F0800B1E995 /* ImageCutter.cpp */,
@@ -343,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				759331ED2142CC240075496E /* main.cpp in Sources */,
-				75E398AF21591F0D0044FA93 /* Resize.cpp in Sources */,
 				75C8A47E216B7F0800B1E995 /* ImageCutter.cpp in Sources */,
 				75C8A481216B7F1D00B1E995 /* Tailer.cpp in Sources */,
 				75C8A47B216B766500B1E995 /* ImageAnalysis.cpp in Sources */,
