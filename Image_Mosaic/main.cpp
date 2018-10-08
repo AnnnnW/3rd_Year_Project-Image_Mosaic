@@ -6,16 +6,12 @@
 //  Copyright © 2018年 WangAnnan. All rights reserved.
 //
 
-#include <fstream>
 #include <iostream>
-#include <opencv2/opencv.hpp>
-#include <stdio.h>
-#include <vector>
 #include <string>
-#include <dirent.h>
+#include <stdio.h>
+#include <opencv2/opencv.hpp>
 
-#include "Resize.hpp"
-#include "ImageDetail.hpp"
+#include "ImageAnalysis.hpp"
 
 using namespace cv;                             //包含cv命名空间
 using namespace std;
@@ -23,42 +19,6 @@ using namespace std;
 String defaultpath = "/Users/wangannan/Image_Mosaic/IMG/";
 String readpath = defaultpath + "Input/";
 String savepath = defaultpath + "Output/";
-
-int readImgName()
-{
-    struct dirent *ptr;
-    DIR *dir;
-    string path = readpath + "Resource";
-    dir = opendir(path.c_str());
-    vector<string> imgs;
-    cout << "file name" << endl;
-    while ((ptr = readdir(dir)) != NULL)
-    {
-        //skip "." and ".."
-        if (ptr -> d_name[0] == '.')
-            continue;
-        imgs.push_back(ptr -> d_name); //add the d_name to the end of the vector
-    }
-    
-    ofstream outfile;
-    outfile.open(defaultpath + "data.csv", ofstream::app);      //if the file doesnt exist, create a file;otherwise, add to the end of the file
-    
-    for (int i = 1; i < imgs.size(); i++)
-    {
-        if (outfile.is_open())
-        {
-            outfile << imgs[i] << endl;
-        } //if
-        else
-        {
-            cout << "Cannot open the file" << endl;
-        } // else
-    } //for
-    outfile.close();
-    closedir(dir);
-    return 0;
-}
-
 
 int main()
 {
@@ -85,7 +45,7 @@ int main()
 //    imshow("Result Image", resultImage);
     
     //read the image name and output a file
-    readImgName();
+    readImgName(readpath, defaultpath);
     waitKey(0);                                 // Wait for any key to be pressed to exit
     return 0;
 }
