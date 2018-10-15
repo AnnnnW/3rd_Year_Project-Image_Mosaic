@@ -30,14 +30,16 @@ int main()
         printf("Can't read the file, please check the path and try again.\n");
         return -1;
     }
-    namedWindow("Original Image", WINDOW_AUTOSIZE);              // name a window and decide the window size
-    imshow("Original Image", targetImage);         //Show the image, with the window name "Original Image"
+//    namedWindow("Original Image", WINDOW_AUTOSIZE);              // name a window and decide the window size
+//    imshow("Original Image", targetImage);         //Show the image, with the window name "Original Image"
     
-    ImageCutter(targetImage);
+//    ImageCutter(targetImage);
+
+    tempImage = resizer(targetImage, 3, 2);
     
-//    resize(srcImage,tempImage,Size(100,100),0,0,INTER_LINEAR);      //resize the srcimage to a certain fix size 100 * 100
-//
-//    imwrite(savepath + "Result.jpg", tempImage);            // write an image as an output file
+    cout << "Small =\n" << tempImage << endl;
+    
+    imwrite(savepath + "Result.jpg", tempImage);            // write an image as an output file
 //    Mat resultImage = imread("Result.jpg");     // print out the result image in a new window
 //    if (!resultImage.data)
 //    {
@@ -45,7 +47,15 @@ int main()
 //        return -1;
 //    }
 //    namedWindow("Result Image", WINDOW_AUTOSIZE);
-//    imshow("Result Image", resultImage);
+    imshow("Result Image", tempImage);
+    
+    Mat temp;
+    temp = tempImage;
+    temp.at<Vec3b>(0,1) = temp.at<Vec3b>(0,0);
+    imwrite(savepath + "temp.jpg", temp);
+    
+    cout << "temp =\n" << temp << endl;
+
     
     //read the image name and output a file
     readImgName(readpath, defaultpath);
