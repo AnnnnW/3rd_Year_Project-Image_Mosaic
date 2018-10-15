@@ -16,7 +16,10 @@ using namespace cv;
 using namespace std;
 
 Mat resizer(Mat targetImg, int col, int row);
-
 int ImageCutter(Mat targetImage);
+Mat hsvTrans(Mat targetImg);
+Mat hsvTrans(Mat targetImg);
+void mosaicFilter(Mat targetImg, int height, int width);
+//int avarageValue(int mosaicArray);
 
 #endif /* ImageCutter_hpp */
