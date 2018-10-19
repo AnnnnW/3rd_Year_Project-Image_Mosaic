@@ -19,7 +19,7 @@ Mat resizer(Mat targetImg, int col, int row);
 int ImageCutter(Mat targetImage);
 Mat hsvTrans(Mat targetImg);
 Mat hsvTrans(Mat targetImg);
-void mosaicFilter(Mat targetImg, int height, int width);
-//int avarageValue(int mosaicArray);
+int mosaicFilter(Mat targetImg, int height, int width);
+Vec3b averageValue(int mosaicArray[81][3]);
 
 #endif /* ImageCutter_hpp */

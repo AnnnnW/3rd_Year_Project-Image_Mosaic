@@ -33,13 +33,9 @@ int main()
 //    namedWindow("Original Image", WINDOW_AUTOSIZE);              // name a window and decide the window size
 //    imshow("Original Image", targetImage);         //Show the image, with the window name "Original Image"
     
-//    ImageCutter(targetImage);
-
-    tempImage = resizer(targetImage, 3, 2);
+    ImageCutter(targetImage);
     
-    cout << "Small =\n" << tempImage << endl;
-    
-    imwrite(savepath + "Result.jpg", tempImage);            // write an image as an output file
+//    imwrite(savepath + "Result.jpg", tempImage);            // write an image as an output file
 //    Mat resultImage = imread("Result.jpg");     // print out the result image in a new window
 //    if (!resultImage.data)
 //    {
@@ -47,14 +43,8 @@ int main()
 //        return -1;
 //    }
 //    namedWindow("Result Image", WINDOW_AUTOSIZE);
-    imshow("Result Image", tempImage);
+//    imshow("Result Image", tempImage);
     
-    Mat temp;
-    temp = tempImage;
-    temp.at<Vec3b>(0,1) = temp.at<Vec3b>(0,0);
-    imwrite(savepath + "temp.jpg", temp);
-    
-    cout << "temp =\n" << temp << endl;
 
     
     //read the image name and output a file
