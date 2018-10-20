@@ -149,7 +149,7 @@ int mosaicFilter(Mat targetImg, int height, int width)
         size = (height - extraH) * 9;
         int extraArrayH[size][RGB];
         
-        for (i = 0; i < width; i += 9)
+        for (i = 4; i < width; i += 9)
         {
             pixelX = i - 4;
             pixelY = extraH;
