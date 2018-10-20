@@ -98,75 +98,67 @@ int mosaicFilter(Mat targetImg, int height, int width)
     int i, j, k, pixelX, pixelY, temp;
     Vec3b average;
     
-    int mosaicArray[81][3];
-
-    for (i = 1; i < height - 4; i+=8)
-        for (j = 1; j < width - 4; j+=8)
+    int mosaicArray[SIZE][RGB];
+    
+    for (i = 4; i < height - 4; i+=9)
+        for (j = 4; j < width - 4; j+=9)
         {
             temp = 0;
-            pixelX = i - 1;     // start from the first pixel for the 3 * 3 filter
-            pixelY = j - 1;
+            pixelX = i - 4;     // start from the first pixel for the 3 * 3 filter
+            pixelY = j - 4;
 
-            for (k = 0; k < 81; k++)
+            for (k = 0; k < SIZE; k++)
             {
-                mosaicArray[k][0] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[0];       // B
-                mosaicArray[k][1] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[1];       // G
-                mosaicArray[k][2] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[2];       // R
-                temp++;
-                if (temp == 9)      // if the first 3 in a row has added to the array, then jump to the next row
-                {
-                    temp = 0;
-                    pixelY++;
-                } // if
+              mosaicArray[k][0] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[0];       // B
+              mosaicArray[k][1] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[1];       // G
+              mosaicArray[k][2] = (int)targetImg.at<Vec3b>(pixelY, pixelX + temp).val[2];       // R
+              temp++;
+              if (temp == 9)      // if the first 3 in a row has added to the array, then jump to the next row
+              {
+                  temp = 0;
+                  pixelY++;
+              } // if
             } // for
-            
-            average = averageValue(mosaicArray);
 
-            pixelX = i - 1;     // the first pixel for the 3 * 3 filter
-            pixelY = j - 1;
+            average = averageValue(SIZE, mosaicArray);
+
+            pixelX = i - 4;     // the first pixel for the 3 * 3 filter
+            pixelY = j - 4;
             temp = 0;
-            
-            for (k = 0; k < 81; k++)
+
+            for (k = 0; k < SIZE; k++)
             {
-                targetImg.at<Vec3b>(pixelY, pixelX + temp) = average;
-                temp++;
-                if (temp == 9)      // if the first 3 in a row has added to the array, then jump to the next row
-                {
-                    temp = 0;
-                    pixelY++;
-                } // if
+              targetImg.at<Vec3b>(pixelY, pixelX + temp) = average;
+              temp++;
+              if (temp == 9)      // if the first 3 in a row has added to the array, then jump to the next row
+              {
+                  temp = 0;
+                  pixelY++;
+              } // if
             } // for
-            
         } // for
     return 0;
 } // mosaicFilter
 
 // avarage value of the 9 pixels
-Vec3b averageValue(int mosaicArray[81][3])
+Vec3b averageValue( int size, int array[size][RGB])
 {
     int bSum = 0;
     int gSum = 0;
     int rSum = 0;
 
-    for (int i = 0; i < 81; i++)
+    for (int i = 0; i < size; i++)
     {
-        bSum = bSum + mosaicArray[i][0];
-        gSum = gSum + mosaicArray[i][1];
-        rSum = rSum + mosaicArray[i][2];
+        bSum = bSum + array[i][0];
+        gSum = gSum + array[i][1];
+        rSum = rSum + array[i][2];
     }
     
-    bSum = (int)bSum / 81;
-    gSum = (int)gSum / 81;
-    rSum = (int)rSum / 81;
+    bSum = (int)bSum / size;
+    gSum = (int)gSum / size;
+    rSum = (int)rSum / size;
     
-//    printf("average rgb: {%i, %i, %i}", rSum, bSum, gSum);
     Vec3b average = {(unsigned char)bSum, (unsigned char)gSum, (unsigned char)rSum};
     
     return average;
-}
-
-// mediam value among the 9 pixels
-int medianValue(vector<Mat> mosaicArray)
-{
-    return 0;
 }
