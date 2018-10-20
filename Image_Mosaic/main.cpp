@@ -23,7 +23,9 @@ String savepath = defaultpath + "Output/";
 
 int main()
 {
-    Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
+//    Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
+    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
+
     Mat tempImage;
     if (!targetImage.data)
     {
