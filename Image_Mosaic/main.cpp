@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 
-#include "ImageAnalysis.hpp"
 #include "ImageCutter.hpp"
+#include "TileAnalysor.hpp"
 
 using namespace cv;                             //包含cv命名空间
 using namespace std;
@@ -23,8 +23,8 @@ String savepath = defaultpath + "Output/";
 
 int main()
 {
-//    Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
-    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
+    Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
+//    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
 
     Mat tempImage;
     if (!targetImage.data)
@@ -50,7 +50,7 @@ int main()
 
     
     //read the image name and output a file
-    readImgName(readpath, defaultpath);
+    TileAnalysor(readpath, defaultpath);
     
     waitKey(0);                                 // Wait for any key to be pressed to exit
     return 0;
