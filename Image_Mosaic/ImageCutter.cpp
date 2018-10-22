@@ -14,19 +14,15 @@ vector<Mat> hsvSplit;
 
 int ImageCutter(Mat targetImage)
 {
-    Mat tempImg;
-    int col = targetImage.cols;
-    int row = targetImage.rows;
+    Mat tempImg = targetImage;
+    int col = tempImg.cols;
+    int row = tempImg.rows;
     
     //resize the target image size if the size is too large for the screen (i.e. 1440 * 900)
     if (col > 900 || row > 1400)
     {
-        tempImg = resizer(targetImage, col, row);
+        tempImg = resizer(tempImg, col, row);
     } // if
-    else
-    {
-        tempImg = targetImage;
-    } //else
     
     imshow("Resized", tempImg);
     
