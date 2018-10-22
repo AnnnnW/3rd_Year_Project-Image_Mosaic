@@ -30,19 +30,19 @@ int ImageCutter(Mat targetImage)
     
     imshow("Resized", tempImg);
     
-    //    Mat hsvImg = hsvTrans(tempImg);
+//    Mat hsvImg = hsvTrans(tempImg);
     
     int height = tempImg.rows;
     int width = tempImg.cols;
-    
+
     //mosaic target image
     mosaicFilter(tempImg, height, width);
     imshow("Mosaic", tempImg);
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Output/9*9.jpg", tempImg);
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Output/9*9Cutter.jpg", tempImg);
     printf("Mosaic target file has finished.\n" );
     
     return 0;
-}
+} // ImageCutter
 
 Mat resizer(Mat targetImg, int col, int row)
 {
@@ -62,7 +62,7 @@ Mat resizer(Mat targetImg, int col, int row)
     
     resize(targetImg, tempImg, Size(row, col));
     return tempImg;
-}
+} // resizer
 
 Mat hsvTrans(Mat targetImg)
 {
@@ -89,7 +89,7 @@ Mat hsvTrans(Mat targetImg)
     
     imshow("hsv", hsvImg);
     return hsvImg;
-}
+} // hsvTrans
 
 int mosaicFilter(Mat targetImg, int height, int width)
 {
