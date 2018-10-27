@@ -17,10 +17,12 @@
 #include <string>
 #include <dirent.h>
 
+#include "ImageCutter.hpp"
+
 using namespace cv;
 using namespace std;
 
 int TileAnalysor(String readpath, String defaultpath);
-int readImgName(struct dirent *ptr, DIR *dir, vector<String> tiles, String readpath, String defaultpath);
-Mat resizer(Mat targetImg, int col, int row);
+int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> averages, String path, String defaultpath);
+Mat tileResizer(Mat targetImg, int col, int row);
 #endif /* TileAnalysor_hpp */
