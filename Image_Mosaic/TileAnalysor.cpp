@@ -44,10 +44,6 @@ int TileAnalysor(String readpath, String defaultpath)
     
     // 写入文件
     writter(ptr, dir, tiles, averages, readpath, defaultpath);
-    
-//    //格式化容器，清除容器内所有数据，为保存下一个txt文件数据文件做准备
-//    tiles.clear();
-
     return 0;
 } // ImageAnalysis
 
@@ -55,7 +51,8 @@ int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> av
 {
     ofstream outfile;
     outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);
-    
+    outfile << "Name,B,G,R"  << endl;
+
     for (int i = 1; i < tiles.size(); i++)
     {
         if (outfile.is_open())
