@@ -1,14 +1,14 @@
 //
-//  TileAnalysor.cpp
+//  TileAnalyser.cpp
 //  Image_Mosaic
 //
 //  Created by WangAnnan on 22/10/2018.
 //  Copyright © 2018 WangAnnan. All rights reserved.
 //
 
-#include "TileAnalysor.hpp"
+#include "TileAnalyser.hpp"
 
-int TileAnalysor(String readpath, String defaultpath)
+int TileAnalyser(String readpath, String defaultpath)
 {
     struct dirent *ptr;
     DIR *dir;
@@ -51,7 +51,7 @@ int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> av
 {
     ofstream outfile;
     outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);
-    outfile << "Name,B,G,R"  << endl;
+    outfile << "Name,B,G,R"  << endl; // 4 columns represent: name, B, G and R value
 
     for (int i = 1; i < tiles.size(); i++)
     {
@@ -66,7 +66,7 @@ int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> av
     } //for
     outfile.close();
     closedir(dir);
-    cout << "Data.csv file has been created with name." << endl;
+    cout << "Data.csv file has been created." << endl;
     return 0;
 } // writter
 

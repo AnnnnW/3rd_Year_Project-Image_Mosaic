@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		750EDF18217E29E800D23C41 /* TileAnalysor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 750EDF16217E29E800D23C41 /* TileAnalysor.cpp */; };
+		750EDF18217E29E800D23C41 /* TileAnalyser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 750EDF16217E29E800D23C41 /* TileAnalyser.cpp */; };
 		759331ED2142CC240075496E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 759331EC2142CC240075496E /* main.cpp */; };
 		7593321F2142CC840075496E /* libopencv_calib3d.3.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 759331F42142CC7D0075496E /* libopencv_calib3d.3.4.2.dylib */; };
 		759332202142CC840075496E /* libopencv_dnn.3.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 759331F52142CC7D0075496E /* libopencv_dnn.3.4.2.dylib */; };
@@ -69,8 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		750EDF16217E29E800D23C41 /* TileAnalysor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TileAnalysor.cpp; sourceTree = "<group>"; };
-		750EDF17217E29E800D23C41 /* TileAnalysor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileAnalysor.hpp; sourceTree = "<group>"; };
+		750EDF16217E29E800D23C41 /* TileAnalyser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TileAnalyser.cpp; sourceTree = "<group>"; };
+		750EDF17217E29E800D23C41 /* TileAnalyser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileAnalyser.hpp; sourceTree = "<group>"; };
 		759331E92142CC240075496E /* Image_Mosaic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Image_Mosaic; sourceTree = BUILT_PRODUCTS_DIR; };
 		759331EC2142CC240075496E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		759331F42142CC7D0075496E /* libopencv_calib3d.3.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.3.4.2.dylib; path = ../../../../usr/local/Cellar/opencv/3.4.2/lib/libopencv_calib3d.3.4.2.dylib; sourceTree = "<group>"; };
@@ -202,8 +202,8 @@
 				75C8A47D216B7F0800B1E995 /* ImageCutter.hpp */,
 				75EFCF8C216BA93800436CFC /* Tiler.cpp */,
 				75EFCF8D216BA93800436CFC /* Tiler.hpp */,
-				750EDF16217E29E800D23C41 /* TileAnalysor.cpp */,
-				750EDF17217E29E800D23C41 /* TileAnalysor.hpp */,
+				750EDF16217E29E800D23C41 /* TileAnalyser.cpp */,
+				750EDF17217E29E800D23C41 /* TileAnalyser.hpp */,
 			);
 			path = Image_Mosaic;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 				759331ED2142CC240075496E /* main.cpp in Sources */,
 				75C8A47E216B7F0800B1E995 /* ImageCutter.cpp in Sources */,
 				75EFCF8E216BA93800436CFC /* Tiler.cpp in Sources */,
-				750EDF18217E29E800D23C41 /* TileAnalysor.cpp in Sources */,
+				750EDF18217E29E800D23C41 /* TileAnalyser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

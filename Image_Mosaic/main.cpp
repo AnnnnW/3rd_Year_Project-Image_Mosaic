@@ -12,7 +12,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "ImageCutter.hpp"
-#include "TileAnalysor.hpp"
+#include "TileAnalyser.hpp"
 
 using namespace cv;                             //包含cv命名空间
 using namespace std;
@@ -50,7 +50,7 @@ int main()
 
     
     //read the image name and output a file
-    TileAnalysor(readpath, defaultpath);
+    TileAnalyser(readpath, defaultpath);
     
     waitKey(0);                                 // Wait for any key to be pressed to exit
     return 0;

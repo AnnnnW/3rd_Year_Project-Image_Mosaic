@@ -6,8 +6,8 @@
 //  Copyright © 2018 WangAnnan. All rights reserved.
 //
 
-#ifndef TileAnalysor_hpp
-#define TileAnalysor_hpp
+#ifndef TileAnalyser_hpp
+#define TileAnalyser_hpp
 
 #include <stdio.h>
 #include <fstream>
@@ -22,7 +22,7 @@
 using namespace cv;
 using namespace std;
 
-int TileAnalysor(String readpath, String defaultpath);
+int TileAnalyser(String readpath, String defaultpath);
 int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> averages, String path, String defaultpath);
 Mat tileResizer(Mat targetImg, int col, int row);
-#endif /* TileAnalysor_hpp */
+#endif /* TileAnalyser_hpp */

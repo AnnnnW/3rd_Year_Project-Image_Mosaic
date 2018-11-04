@@ -35,7 +35,7 @@ int ImageCutter(Mat targetImage)
     mosaicFilter(tempImg, height, width);
     imshow("Mosaic", tempImg);
     imwrite("/Users/wangannan/Image_Mosaic/IMG/Output/9*9Cutter.jpg", tempImg);
-    printf("Mosaic target file has finished.\n" );
+    printf("The mosaic target file has been saved.\n" );
     
     return 0;
 } // ImageCutter
@@ -89,8 +89,6 @@ Mat hsvTrans(Mat targetImg)
 
 int mosaicFilter(Mat targetImg, int height, int width)
 {
-    printf("Add the filter onto the target image....\n");
-    
     int i = 0, j = 0, pixelX = 0, pixelY = 0;
     Vec3b average;
     
@@ -160,6 +158,7 @@ int mosaicFilter(Mat targetImg, int height, int width)
             writePixel(size, average, targetImg, pixelY, pixelX, 9);
         } // for
     } // if
+    printf("The target file has been mosaic.\n");
     return 0;
 } // mosaicFilter
 
@@ -214,6 +213,6 @@ Vec3b averageValue( int size, int array[size][RGB])
     rSum = (int)rSum / size;
     
     Vec3b average = {(unsigned char)bSum, (unsigned char)gSum, (unsigned char)rSum};
-    
+        
     return average;
 } // averageValue
