@@ -16,6 +16,7 @@ int TileAnalyser(string readpath, string defaultpath)
     dir = opendir(path.c_str());
     vector<string> tiles;
     vector<Vec3b> averages;
+    vector<int> hue;
     int rgbArray[SIZE][RGB];
     if ((ptr = readdir(dir)) == NULL)
     {
@@ -37,17 +38,18 @@ int TileAnalyser(string readpath, string defaultpath)
         imwrite(readpath + "Resizer/" + ptr -> d_name, tempImg);
         
         readPixel(SIZE, rgbArray, tempImg, 0, 0, 9);
-        
+
         averages.push_back(averageValue(SIZE, rgbArray));
+        hue.push_back((int)hsvTrans(averageValue(SIZE, rgbArray))[0] * 2);
 
     } // while
     
     // 写入文件
-    writter(ptr, dir, tiles, averages, readpath, defaultpath);
+    writter(ptr, dir, tiles, averages, hue, readpath, defaultpath);
     return 0;
 } // ImageAnalysis
 
-int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> averages, string path, string defaultpath)
+int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> averages, vector<int> hue, string path, string defaultpath)
 {
     ofstream outfile;
     outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);          // If the file exist, then set the length to 0 then open
@@ -57,7 +59,7 @@ int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> av
     {
         if (outfile.is_open())
         {
-            outfile << tiles[i] << "," << (int)averages[i][0]  << "," << (int)averages[i][1]  << "," << (int)averages[i][2] << endl;
+            outfile << tiles[i] << "," << (int)averages[i][0]  << "," << (int)averages[i][1]  << "," << (int)averages[i][2] << "," << hue[i] << endl;
         } //if
         else
         {
@@ -76,3 +78,12 @@ Mat tileResizer(Mat targetImg, int col, int row)
     resize(targetImg, tempImg, Size(row, col));
     return tempImg;
 } // resizer
+
+Vec3b hsvTrans(Vec3b rgbAverage)
+{
+    Mat3b hsvAverage;
+    Mat3b rgb(rgbAverage);
+    
+    cvtColor(rgb, hsvAverage, COLOR_BGR2HSV);     // transform rgb value to hsv value
+    return hsvAverage.at<Vec3b>();
+} // hsvTrans
