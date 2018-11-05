@@ -8,13 +8,13 @@
 
 #include "TileAnalyser.hpp"
 
-int TileAnalyser(String readpath, String defaultpath)
+int TileAnalyser(string readpath, string defaultpath)
 {
     struct dirent *ptr;
     DIR *dir;
-    String path = readpath + "Resource/";
+    string path = readpath + "Resource/";
     dir = opendir(path.c_str());
-    vector<String> tiles;
+    vector<string> tiles;
     vector<Vec3b> averages;
     int rgbArray[SIZE][RGB];
     if ((ptr = readdir(dir)) == NULL)
@@ -47,11 +47,11 @@ int TileAnalyser(String readpath, String defaultpath)
     return 0;
 } // ImageAnalysis
 
-int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> averages, String path, String defaultpath)
+int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> averages, string path, string defaultpath)
 {
     ofstream outfile;
-    outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);
-    outfile << "Name,B,G,R"  << endl; // 4 columns represent: name, B, G and R value
+    outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);          // If the file exist, then set the length to 0 then open
+    outfile << "Name,B,G,R,H"  << endl; // 4 columns represent: name, B, G and R value
 
     for (int i = 1; i < tiles.size(); i++)
     {

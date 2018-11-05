@@ -25,9 +25,7 @@ int ImageCutter(Mat targetImage)
     } // if
     
     imshow("Resized", tempImg);
-    
-//    Mat hsvImg = hsvTrans(tempImg);
-    
+        
     int height = tempImg.rows;
     int width = tempImg.cols;
 
@@ -59,33 +57,6 @@ Mat resizer(Mat targetImg, int col, int row)
     resize(targetImg, tempImg, Size(row, col));
     return tempImg;
 } // resizer
-
-Mat hsvTrans(Mat targetImg)
-{
-    Mat hsvImg;
-    
-    // lower bound and higher bound for hue, saturation and value
-    //    int iLowH = 0;
-    //    int iHighH = 180;
-    //    int iLowS = 0;
-    //    int iHighS = 255;
-    //    int iLowV = 0;
-    //    int iHighV = 255;
-    
-    //    vector<Mat> hsvSplit;
-    cvtColor(targetImg, hsvImg, COLOR_BGR2HSV);     // transform rgb image to hsv image
-    
-    // make a histogram for the hsv value
-    split(hsvImg, hsvSplit);
-    equalizeHist(hsvSplit[2], hsvSplit[2]);
-    merge(hsvSplit, hsvImg);    // merge the array of hsvImg and hsvSplit together
-    
-    //    Mat threshouldedImg;
-    //    inRange(hsvImg, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), threshouldedImg);
-    
-    imshow("hsv", hsvImg);
-    return hsvImg;
-} // hsvTrans
 
 int mosaicFilter(Mat targetImg, int height, int width)
 {

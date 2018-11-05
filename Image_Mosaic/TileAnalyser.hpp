@@ -22,7 +22,7 @@
 using namespace cv;
 using namespace std;
 
-int TileAnalyser(String readpath, String defaultpath);
-int writter(struct dirent *ptr, DIR *dir, vector<String> tiles, vector<Vec3b> averages, String path, String defaultpath);
+int TileAnalyser(string readpath, string defaultpath);
+int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> averages, string path, string defaultpath);
 Mat tileResizer(Mat targetImg, int col, int row);
 #endif /* TileAnalyser_hpp */

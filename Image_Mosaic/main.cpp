@@ -13,13 +13,14 @@
 
 #include "ImageCutter.hpp"
 #include "TileAnalyser.hpp"
+#include "Tiler.hpp"
 
 using namespace cv;                             //包含cv命名空间
 using namespace std;
 
-String defaultpath = "/Users/wangannan/Image_Mosaic/IMG/";
-String readpath = defaultpath + "Input/";
-String savepath = defaultpath + "Output/";
+string defaultpath = "/Users/wangannan/Image_Mosaic/IMG/";
+string readpath = defaultpath + "Input/";
+string savepath = defaultpath + "Output/";
 
 int main()
 {
@@ -51,6 +52,8 @@ int main()
     
     //read the image name and output a file
     TileAnalyser(readpath, defaultpath);
+    
+    Tiler(readpath, defaultpath);
     
     waitKey(0);                                 // Wait for any key to be pressed to exit
     return 0;
