@@ -63,7 +63,7 @@ int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> av
         } //if
         else
         {
-            cout << "Cannot open the file" << endl;
+            cout << "Cannot write to the file" << endl;
         } // else
     } //for
     outfile.close();

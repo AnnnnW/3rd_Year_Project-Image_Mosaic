@@ -27,34 +27,25 @@ int main()
     Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
 //    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
 
-    Mat tempImage;
     if (!targetImage.data)
     {
         printf("Can't read the file, please check the path and try again.\n");
         return -1;
     }
-//    namedWindow("Original Image", WINDOW_AUTOSIZE);              // name a window and decide the window size
-//    imshow("Original Image", targetImage);         //Show the image, with the window name "Original Image"
     
     ImageCutter(targetImage);
-    
-//    imwrite(savepath + "Result.jpg", tempImage);            // write an image as an output file
-//    Mat resultImage = imread("Result.jpg");     // print out the result image in a new window
-//    if (!resultImage.data)
-//    {
-//        printf("Can't read the file, please check the path and try again.\n");
-//        return -1;
-//    }
-//    namedWindow("Result Image", WINDOW_AUTOSIZE);
-//    imshow("Result Image", tempImage);
-    
-
     
     //read the image name and output a file
     TileAnalyser(readpath, defaultpath);
     
-    Tiler(readpath, defaultpath);
+    Mat mosaicImage = imread(readpath + "9*9Cutter.jpg");             // Load the image
+
+    Tiler(mosaicImage, readpath, defaultpath, savepath);
     
-    waitKey(0);                                 // Wait for any key to be pressed to exit
+    
+    if(waitKey(0))                                 // Wait for any key to be pressed to exit
+    {
+        printf("The program is successfully exited by keyboard interruption :) \n");
+    }
     return 0;
 }
