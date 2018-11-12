@@ -18,9 +18,8 @@
 using namespace cv;
 using namespace std;
 
-Mat resizer(Mat targetImg, int col, int row);
 int ImageCutter(Mat targetImage);
-Mat hsvTrans(Mat targetImg);
+Mat resizer(Mat targetImg, int col, int row);
 int mosaicFilter(Mat targetImg, int height, int width);
 void readPixel(int size, int array[size][RGB], Mat targetImg, int pixelY, int pixelX, int breakpoint);
 void writePixel(int size, Vec3b average, Mat targetImg, int pixelY, int pixelX, int breakpoint);

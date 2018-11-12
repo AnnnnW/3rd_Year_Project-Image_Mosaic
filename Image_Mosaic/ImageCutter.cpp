@@ -14,35 +14,29 @@ vector<Mat> hsvSplit;
 
 int ImageCutter(Mat targetImage)
 {
-    Mat tempImg;
-    int col = targetImage.cols;
-    int row = targetImage.rows;
+    Mat tempImg = targetImage;
+    int col = tempImg.cols;
+    int row = tempImg.rows;
     
     //resize the target image size if the size is too large for the screen (i.e. 1440 * 900)
     if (col > 900 || row > 1400)
     {
-        tempImg = resizer(targetImage, col, row);
+        tempImg = resizer(tempImg, col, row);
     } // if
-    else
-    {
-        tempImg = targetImage;
-    } //else
     
     imshow("Resized", tempImg);
-    
-    //    Mat hsvImg = hsvTrans(tempImg);
-    
+        
     int height = tempImg.rows;
     int width = tempImg.cols;
-    
+
     //mosaic target image
     mosaicFilter(tempImg, height, width);
     imshow("Mosaic", tempImg);
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Output/9*9.jpg", tempImg);
-    printf("Mosaic target file has finished.\n" );
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/9*9Cutter.jpg", tempImg);
+    printf("The mosaic target file has been saved.\n" );
     
     return 0;
-}
+} // ImageCutter
 
 Mat resizer(Mat targetImg, int col, int row)
 {
@@ -62,39 +56,10 @@ Mat resizer(Mat targetImg, int col, int row)
     
     resize(targetImg, tempImg, Size(row, col));
     return tempImg;
-}
-
-Mat hsvTrans(Mat targetImg)
-{
-    Mat hsvImg;
-    
-    // lower bound and higher bound for hue, saturation and value
-    //    int iLowH = 0;
-    //    int iHighH = 180;
-    //    int iLowS = 0;
-    //    int iHighS = 255;
-    //    int iLowV = 0;
-    //    int iHighV = 255;
-    
-    //    vector<Mat> hsvSplit;
-    cvtColor(targetImg, hsvImg, COLOR_BGR2HSV);     // transform rgb image to hsv image
-    
-    // make a histogram for the hsv value
-    split(hsvImg, hsvSplit);
-    equalizeHist(hsvSplit[2], hsvSplit[2]);
-    merge(hsvSplit, hsvImg);    // merge the array of hsvImg and hsvSplit together
-    
-    //    Mat threshouldedImg;
-    //    inRange(hsvImg, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), threshouldedImg);
-    
-    imshow("hsv", hsvImg);
-    return hsvImg;
-}
+} // resizer
 
 int mosaicFilter(Mat targetImg, int height, int width)
 {
-    printf("Add the filter onto the target image....\n");
-    
     int i = 0, j = 0, pixelX = 0, pixelY = 0;
     Vec3b average;
     
@@ -164,6 +129,7 @@ int mosaicFilter(Mat targetImg, int height, int width)
             writePixel(size, average, targetImg, pixelY, pixelX, 9);
         } // for
     } // if
+    printf("The target file has been mosaic.\n");
     return 0;
 } // mosaicFilter
 
@@ -218,6 +184,6 @@ Vec3b averageValue( int size, int array[size][RGB])
     rSum = (int)rSum / size;
     
     Vec3b average = {(unsigned char)bSum, (unsigned char)gSum, (unsigned char)rSum};
-    
+        
     return average;
 } // averageValue
