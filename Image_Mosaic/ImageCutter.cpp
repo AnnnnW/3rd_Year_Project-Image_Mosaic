@@ -32,7 +32,7 @@ int ImageCutter(Mat targetImage)
     //mosaic target image
     mosaicFilter(tempImg, height, width);
     imshow("Mosaic", tempImg);
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/9*9Cutter.jpg", tempImg);
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/9*9Cutter.jpg", tempImg);
     printf("The mosaic target file has been saved.\n" );
     
     return 0;
