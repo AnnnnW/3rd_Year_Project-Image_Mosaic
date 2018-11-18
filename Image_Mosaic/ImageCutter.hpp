@@ -13,6 +13,7 @@
 #include <opencv2/opencv.hpp>
 
 #define SIZE 81
+#define BREAK 9
 #define RGB 3
 
 using namespace cv;

@@ -29,9 +29,9 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
     
     Vec3b averageRGB;
     
-    for (i = 4; i < width - 4; i+=9)
+    for (i = 4; i < width - 4; i+=BREAK)
     {
-        for (j = 4; j < height - 4; j+=9)
+        for (j = 4; j < height - 4; j+=BREAK)
         {
             pixelX = i;
             pixelY = j;
@@ -43,56 +43,9 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
             pixelX = i - 4;     // the first pixel for the 3 * 3 filter
             pixelY = j - 4;
 
-            tileReplacement(SIZE, tempImg, bestFitTile, pixelY, pixelX, 9);
+            tileReplacement(SIZE, tempImg, bestFitTile, pixelY, pixelX, BREAK);
         } // for
     } // for
-    
-    int extraW = i - 5 ;
-    int extraH = j - 5;
-    int size;
-    
-    // when the width cannot be exactly divided by 9
-    if (width % 9 != 0)
-    {
-        size = (width - extraW) * 9;
-        
-        for (j = 4; j < height - 4; j += 9)
-        {
-            pixelX = extraW;
-            pixelY = j;
-            
-            averageRGB = tempImg.at<Vec3b>(pixelY,pixelX);
-            bestFitIndex = compareHue(averageRGB, hue);
-            bestFitTile = findBestFitTile(readpath, bestFitIndex, tiles);
-
-            pixelX = extraW;
-            pixelY = j - 4;
-
-            tileReplacement(size, tempImg, bestFitTile, pixelY, pixelX, (width - extraW));
-        } // for
-    } // if
-    
-    if (height % 9 != 0)
-    {
-        size = (height - extraH) * 9;
-        
-        for (i = 4; i < width; i += 9)
-        {
-            pixelX = i - 4;
-            pixelY = extraH;
-            
-            
-            averageRGB = tempImg.at<Vec3b>(pixelY,pixelX);
-            bestFitIndex = compareHue(averageRGB, hue);
-            bestFitTile = findBestFitTile(readpath, bestFitIndex, tiles);
-
-            pixelX = i - 4;
-            pixelY = extraH;
-
-            tileReplacement(size, tempImg, bestFitTile, pixelY, pixelX,9);
-
-        } // for
-    } // if
     
     imshow("Result", tempImg);
     imwrite(savepath + "result.jpg", tempImg);

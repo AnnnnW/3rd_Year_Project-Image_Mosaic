@@ -34,10 +34,10 @@ int TileAnalyser(string readpath, string defaultpath)
         tiles.push_back(ptr -> d_name); //add the d_name to the end of the vector
 
         tempImg = imread(path + ptr -> d_name);
-        tempImg = tileResizer(tempImg, 9, 9);
+        tempImg = resizer(tempImg, BREAK, BREAK);
         imwrite(readpath + "Resizer/" + ptr -> d_name, tempImg);
         
-        readPixel(SIZE, rgbArray, tempImg, 0, 0, 9);
+        readPixel(SIZE, rgbArray, tempImg, 0, 0, BREAK);
 
         averages.push_back(averageValue(SIZE, rgbArray));
         hue.push_back((int)hsvTrans(averageValue(SIZE, rgbArray))[0] * 2);
@@ -71,13 +71,6 @@ int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> av
     cout << "Data.csv file has been created." << endl;
     return 0;
 } // writter
-
-Mat tileResizer(Mat targetImg, int col, int row)
-{
-    Mat tempImg;
-    resize(targetImg, tempImg, Size(row, col));
-    return tempImg;
-} // resizer
 
 Vec3b hsvTrans(Vec3b rgbAverage)
 {

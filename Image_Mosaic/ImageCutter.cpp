@@ -15,17 +15,7 @@ vector<Mat> hsvSplit;
 int ImageCutter(Mat targetImage)
 {
     Mat tempImg = targetImage;
-    int col = tempImg.cols;
-    int row = tempImg.rows;
     
-    //resize the target image size if the size is too large for the screen (i.e. 1440 * 900)
-    if (col > 900 || row > 1400)
-    {
-        tempImg = resizer(tempImg, col, row);
-    } // if
-    
-    imshow("Resized", tempImg);
-        
     int height = tempImg.rows;
     int width = tempImg.cols;
 
@@ -40,20 +30,8 @@ int ImageCutter(Mat targetImage)
 
 Mat resizer(Mat targetImg, int col, int row)
 {
-    int temp;
     Mat tempImg;
-    if (col > 900)
-    {
-        temp = (int)col / 800;
-        col = (int)col / temp;
-    } // if
-    
-    if (row > 1400)
-    {
-        temp = row / 1300;
-        row = (int) row / temp;
-    } // if
-    
+
     resize(targetImg, tempImg, Size(row, col));
     return tempImg;
 } // resizer
@@ -65,70 +43,31 @@ int mosaicFilter(Mat targetImg, int height, int width)
     
     int mosaicArray[SIZE][RGB];
     
-    for (i = 4; i < width - 4; i+=9)
+    for (i = 4; i < width - 4; i+=BREAK)
     {
-        for (j = 4; j < height - 4; j+=9)
+        for (j = 4; j < height - 4; j+=BREAK)
         {
             pixelX = i - 4;     // start from the first pixel for the 3 * 3 filter
             pixelY = j - 4;
             
-            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, 9);
+            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
             
             average = averageValue(SIZE, mosaicArray);
             
             pixelX = i - 4;     // the first pixel for the 3 * 3 filter
             pixelY = j - 4;
             
-            writePixel(SIZE, average, targetImg, pixelY, pixelX, 9);
+            writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
         } // for
     } // for
     
-    int extraW = i - 5 ;         // if the number of pixels is less than 9, the width of the left pixels
-    int extraH = j - 5;         // if the number of pixels is less than 9, the height of the left pixels
-    int size;
-
-    // when the width cannot be exactly divided by 9
-    if (width % 9 != 0)
-    {
-        size = (width - extraW) * 9;
-        int extraArrayW[size][RGB];
-        
-        for (j = 4; j < height - 4; j += 9)
-        {
-            pixelX = extraW;
-            pixelY = j - 4;
-            
-            readPixel(size, extraArrayW, targetImg, pixelY, pixelX, (width - extraW));
-
-            average = averageValue(size, extraArrayW);
-            
-            pixelX = extraW;
-            pixelY = j - 4;
-            
-            writePixel(size, average, targetImg, pixelY, pixelX, (width - extraW));
-        } // for
-    } // if
+//    Mat tempImg = targetImg;
+    int addH, addW;
+    addH = BREAK - height % BREAK;          // the pixels need to be added in height to form a (2N*1)*(2N*1) block
+    addW = BREAK - width % BREAK;          // pixels to be added in width
     
-    if (height % 9 != 0)
-    {
-        size = (height - extraH) * 9;
-        int extraArrayH[size][RGB];
-        
-        for (i = 4; i < width; i += 9)
-        {
-            pixelX = i - 4;
-            pixelY = extraH;
-            
-            readPixel(size, extraArrayH, targetImg, pixelY, pixelX, 9);
-            
-            average = averageValue(size, extraArrayH);
-            
-            pixelX = i - 4;
-            pixelY = extraH;
-            
-            writePixel(size, average, targetImg, pixelY, pixelX, 9);
-        } // for
-    } // if
+    copyMakeBorder(targetImg, targetImg, 0, addH, 0, addW, BORDER_REPLICATE); // copy the colour of the edge
+
     printf("The target file has been mosaic.\n");
     return 0;
 } // mosaicFilter
