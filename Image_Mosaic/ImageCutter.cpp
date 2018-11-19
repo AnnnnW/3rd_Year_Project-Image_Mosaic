@@ -22,7 +22,6 @@ int ImageCutter(Mat targetImage)
     //mosaic target image
     mosaicFilter(tempImg, height, width);
     imshow("Mosaic", tempImg);
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/9*9Cutter.jpg", tempImg);
     printf("The mosaic target file has been saved.\n" );
     
     return 0;
@@ -43,30 +42,73 @@ int mosaicFilter(Mat targetImg, int height, int width)
     
     int mosaicArray[SIZE][RGB];
     
-    for (i = 4; i < width - 4; i+=BREAK)
+    for (i = CENTRE; i < width - CENTRE; i+=BREAK)
     {
-        for (j = 4; j < height - 4; j+=BREAK)
+        for (j = CENTRE; j < height - CENTRE; j+=BREAK)
         {
-            pixelX = i - 4;     // start from the first pixel for the 3 * 3 filter
-            pixelY = j - 4;
+            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
             
             readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
             
             average = averageValue(SIZE, mosaicArray);
             
-            pixelX = i - 4;     // the first pixel for the 3 * 3 filter
-            pixelY = j - 4;
+            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
             
             writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
         } // for
     } // for
     
-//    Mat tempImg = targetImg;
     int addH, addW;
     addH = BREAK - height % BREAK;          // the pixels need to be added in height to form a (2N*1)*(2N*1) block
     addW = BREAK - width % BREAK;          // pixels to be added in width
     
     copyMakeBorder(targetImg, targetImg, 0, addH, 0, addW, BORDER_REPLICATE); // copy the colour of the edge
+    
+    height = targetImg.rows;
+    width = targetImg.cols;
+    
+    int extraW = i;
+    int extraH = j;
+    
+    for (i = extraW; i < width; i+=BREAK)
+    {
+        for (j = 4; j < height; j+=BREAK)
+        {
+            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
+            
+            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
+            
+            average = averageValue(SIZE, mosaicArray);
+            
+            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
+            
+            writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
+        } // for
+    } // for
+    
+    for (i = 4; i < width; i+=BREAK)
+    {
+        for (j = extraH; j < height; j+=BREAK)
+        {
+            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
+            
+            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
+            
+            average = averageValue(SIZE, mosaicArray);
+            
+            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
+            
+            writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
+        } // for
+    } // for
+
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/9*9Cutter.jpg", targetImg);
 
     printf("The target file has been mosaic.\n");
     return 0;

@@ -29,9 +29,9 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
     
     Vec3b averageRGB;
     
-    for (i = 4; i < width - 4; i+=BREAK)
+    for (i = CENTRE; i < width - CENTRE; i+=BREAK)
     {
-        for (j = 4; j < height - 4; j+=BREAK)
+        for (j = CENTRE; j < height - CENTRE; j+=BREAK)
         {
             pixelX = i;
             pixelY = j;
@@ -40,15 +40,15 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
             bestFitIndex = compareHue(averageRGB, hue);
             bestFitTile = findBestFitTile(readpath, bestFitIndex, tiles);
 
-            pixelX = i - 4;     // the first pixel for the 3 * 3 filter
-            pixelY = j - 4;
+            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
+            pixelY = j - CENTRE;
 
             tileReplacement(SIZE, tempImg, bestFitTile, pixelY, pixelX, BREAK);
         } // for
     } // for
     
     imshow("Result", tempImg);
-    imwrite(savepath + "result.jpg", tempImg);
+    imwrite(savepath + "result(9*9).jpg", tempImg);
     printf("The result picture has been created.\n");
 
     

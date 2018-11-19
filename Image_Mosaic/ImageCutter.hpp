@@ -14,6 +14,7 @@
 
 #define SIZE 81
 #define BREAK 9
+#define CENTRE 4
 #define RGB 3
 
 using namespace cv;
