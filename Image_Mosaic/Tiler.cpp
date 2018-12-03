@@ -141,7 +141,7 @@ void tileReplacement(int size, Mat targetImg, Mat tile, int pixelY, int pixelX, 
     
         for (int k = 0; k < size; k++)
         {
-            targetImg.at<Vec3b>(pixelY, pixelX + temp) = tile.at<Vec3b>(i, temp);
+            targetImg.at<Vec3b>(pixelY, pixelX + temp) = 0.5 * tile.at<Vec3b>(i, temp) + 0.5 * targetImg.at<Vec3b>(pixelY, pixelX + temp);
             temp++;
             if (temp == breakpoint)
             {
