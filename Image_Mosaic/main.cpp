@@ -38,8 +38,8 @@ int main()
     //read the image name and output a file
     TileAnalyser(readpath, defaultpath);
     
-    Mat mosaicImage = imread(readpath + "Cutter/9*9Cutter.jpg");             // Load the image
-
+    Mat mosaicImage = imread(readpath + "Cutter/25*25Cutter(masking).jpg");             // Load the image
+    
     Tiler(mosaicImage, readpath, defaultpath, savepath);
     
     

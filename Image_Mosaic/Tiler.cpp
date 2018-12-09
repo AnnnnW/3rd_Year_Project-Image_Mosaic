@@ -15,7 +15,7 @@ int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath)
     string path = readpath + "Resource/";
     string filePath = defaultpath + "data.csv";
     
-    Mat targetImg = imread(readpath + "testing_image.jpg");
+    Mat targetImg = imread(readpath + "25*25Edgeborder.jpg");
 
     vector<string> tiles;
     vector<Vec3b> averages;
@@ -31,9 +31,9 @@ int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath)
     
     Vec3b averageRGB;
     
-    for (i = CENTRE; i < width - CENTRE; i+=BREAK)
+    for (i = 0; i < width; i+=BREAK)
     {
-        for (j = CENTRE; j < height - CENTRE; j+=BREAK)
+        for (j = 0; j < height; j+=BREAK)
         {
             pixelX = i;
             pixelY = j;
@@ -42,8 +42,8 @@ int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath)
             bestFitIndex = compareHue(averageRGB, hue);
             bestFitTile = findBestFitTile(readpath, bestFitIndex, tiles);
 
-            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
+            pixelX = i;     // the first pixel
+            pixelY = j;
 
             tileReplacement(SIZE, tempImg, targetImg, bestFitTile, pixelY, pixelX, BREAK);
         } // for
@@ -143,7 +143,8 @@ void tileReplacement(int size, Mat mosaicImg, Mat targetImg, Mat tile, int pixel
     
         for (int k = 0; k < size; k++)
         {
-            mosaicImg.at<Vec3b>(pixelY, pixelX + temp) = (1 - transparency) * tile.at<Vec3b>(i, temp) + transparency * targetImg.at<Vec3b>(pixelY, pixelX + temp);
+            mosaicImg.at<Vec3b>(pixelY, pixelX + temp) = (1 - transparency) * tile.at<Vec3b>(i, temp) +
+                                                         transparency * targetImg.at<Vec3b>(pixelY, pixelX + temp);
             temp++;
             if (temp == breakpoint)
             {
