@@ -49,6 +49,23 @@ int TileAnalyser(string readpath, string defaultpath)
     return 0;
 } // ImageAnalysis
 
+Mat resizer(Mat targetImg, int col, int row)
+{
+    Mat tempImg;
+    
+    resize(targetImg, tempImg, Size(row, col));
+    return tempImg;
+} // resizer
+
+Vec3b hsvTrans(Vec3b rgbAverage)
+{
+    Mat3b hsvAverage;
+    Mat3b rgb(rgbAverage);
+    
+    cvtColor(rgb, hsvAverage, COLOR_BGR2HSV);     // transform rgb value to hsv value
+    return hsvAverage.at<Vec3b>();
+} // hsvTrans
+
 int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> averages, vector<int> hue, string path, string defaultpath)
 {
     ofstream outfile;
@@ -71,12 +88,3 @@ int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> av
     cout << "Data.csv file has been created." << endl;
     return 0;
 } // writter
-
-Vec3b hsvTrans(Vec3b rgbAverage)
-{
-    Mat3b hsvAverage;
-    Mat3b rgb(rgbAverage);
-    
-    cvtColor(rgb, hsvAverage, COLOR_BGR2HSV);     // transform rgb value to hsv value
-    return hsvAverage.at<Vec3b>();
-} // hsvTrans
