@@ -15,12 +15,20 @@ vector<Mat> hsvSplit;
 int ImageCutter(Mat targetImage)
 {
     Mat tempImg = targetImage;
-    
-    int height = tempImg.rows;
-    int width = tempImg.cols;
 
     //mosaic target image
-    mosaicFilter(tempImg, height, width);
+    Mat borderImg = edgeBorder(tempImg);
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/25*25EdgeBorder.jpg", borderImg);
+    printf("The edge of the target image has been bordered.\n" );
+    
+    borderImg = imread("/Users/wangannan/Image_Mosaic/IMG/Input/25*25EdgeBorder.jpg");
+    
+    int height = borderImg.rows;
+    int width = borderImg.cols;
+
+    tempImg = mosaicFilter(borderImg, height, width);
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/25*25Cutter(masking).jpg", tempImg);
+
     imshow("Mosaic", tempImg);
     printf("The mosaic target file has been saved.\n" );
     
@@ -35,83 +43,49 @@ Mat resizer(Mat targetImg, int col, int row)
     return tempImg;
 } // resizer
 
-int mosaicFilter(Mat targetImg, int height, int width)
+Mat edgeBorder(Mat targetImg)
+{
+    Mat tempImg = targetImg;
+    
+    int addH, addW;
+    int height = tempImg.rows;
+    int width = tempImg.cols;
+    
+    addH = BREAK - height % BREAK;          // the pixels need to be added in height to form a (2N*1)*(2N*1) block
+    addW = BREAK - width % BREAK;          // pixels to be added in width
+    
+    copyMakeBorder(tempImg, tempImg, 0, addH, 0, addW, BORDER_REPLICATE); // copy the colour of the edge
+    
+    return tempImg;
+} // EdgeBorder
+
+Mat mosaicFilter(Mat targetImg, int height, int width)
 {
     int i = 0, j = 0, pixelX = 0, pixelY = 0;
     Vec3b average;
     
     int mosaicArray[SIZE][RGB];
     
-    for (i = CENTRE; i < width - CENTRE; i+=BREAK)
+    for (i = 0; i < width; i+=BREAK)
     {
-        for (j = CENTRE; j < height - CENTRE; j+=BREAK)
+        for (j = 0; j < height; j+=BREAK)
         {
-            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
+            pixelX = i;     // start from the first pixel for the 3 * 3 filter
+            pixelY = j;
             
             readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
             
             average = averageValue(SIZE, mosaicArray);
             
-            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
+            pixelX = i;     // the first pixel for the 3 * 3 filter
+            pixelY = j;
             
             writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
         } // for
     } // for
-    
-    int addH, addW;
-    addH = BREAK - height % BREAK;          // the pixels need to be added in height to form a (2N*1)*(2N*1) block
-    addW = BREAK - width % BREAK;          // pixels to be added in width
-    
-    copyMakeBorder(targetImg, targetImg, 0, addH, 0, addW, BORDER_REPLICATE); // copy the colour of the edge
-    
-    height = targetImg.rows;
-    width = targetImg.cols;
-    
-    int extraW = i;
-    int extraH = j;
-    
-    for (i = extraW; i < width; i+=BREAK)
-    {
-        for (j = 4; j < height; j+=BREAK)
-        {
-            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
-            
-            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
-            
-            average = averageValue(SIZE, mosaicArray);
-            
-            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
-            
-            writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
-        } // for
-    } // for
-    
-    for (i = 4; i < width; i+=BREAK)
-    {
-        for (j = extraH; j < height; j+=BREAK)
-        {
-            pixelX = i - CENTRE;     // start from the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
-            
-            readPixel(SIZE, mosaicArray, targetImg, pixelY, pixelX, BREAK);
-            
-            average = averageValue(SIZE, mosaicArray);
-            
-            pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
-            pixelY = j - CENTRE;
-            
-            writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
-        } // for
-    } // for
-
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/9*9Cutter.jpg", targetImg);
 
     printf("The target file has been mosaic.\n");
-    return 0;
+    return targetImg;
 } // mosaicFilter
 
 void readPixel(int size, int array[size][RGB], Mat targetImg, int pixelY, int pixelX, int breakpoint)
