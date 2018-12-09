@@ -20,10 +20,12 @@
 using namespace cv;
 using namespace std;
 
-int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath);
+#define transparency 0.6
+
+int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath);
 void reader(string filePath, vector<string> &tiles, vector<Vec3b> &averages, vector<int> &hue);
 int compareHue(Vec3b averageRGB, vector<int> hue);
 Mat findBestFitTile(string readPath, int bestFitIndex, vector<string> tiles);
-void tileReplacement(int size, Mat targetImg, Mat tile, int pixelY, int pixelX, int breakpoint);
+void tileReplacement(int size, Mat mosaicImg, Mat targetImg, Mat tile, int pixelY, int pixelX, int breakpoint);
 
 #endif /* Tiler_hpp */
