@@ -10,10 +10,12 @@
 #include "TileAnalyser.hpp"
 #include "ImageCutter.hpp"
 
-int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
+int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath)
 {
     string path = readpath + "Resource/";
     string filePath = defaultpath + "data.csv";
+    
+    Mat targetImg = imread(readpath + "testing_image.jpg");
 
     vector<string> tiles;
     vector<Vec3b> averages;
@@ -21,7 +23,7 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
 
     reader(filePath, tiles, averages, hue);
 
-    Mat tempImg = targetImg, bestFitTile;
+    Mat tempImg = mosaicImg, bestFitTile;
     
     int i = 0, j = 0, pixelX = 0, pixelY = 0, bestFitIndex;
     int height = tempImg.rows;
@@ -43,12 +45,12 @@ int Tiler(Mat targetImg, string readpath, string defaultpath, string savepath)
             pixelX = i - CENTRE;     // the first pixel for the 3 * 3 filter
             pixelY = j - CENTRE;
 
-            tileReplacement(SIZE, tempImg, bestFitTile, pixelY, pixelX, BREAK);
+            tileReplacement(SIZE, tempImg, targetImg, bestFitTile, pixelY, pixelX, BREAK);
         } // for
     } // for
     
     imshow("Result", tempImg);
-    imwrite(savepath + "result(9*9).jpg", tempImg);
+    imwrite(savepath + "result(25*25) with masking.jpg", tempImg);
     printf("The result picture has been created.\n");
 
     
@@ -135,13 +137,13 @@ Mat findBestFitTile(string readPath, int bestFitIndex, vector<string> tiles)
     return tile;
 }
 
-void tileReplacement(int size, Mat targetImg, Mat tile, int pixelY, int pixelX, int breakpoint)
+void tileReplacement(int size, Mat mosaicImg, Mat targetImg, Mat tile, int pixelY, int pixelX, int breakpoint)
 {
         int temp = 0, i = 0;
     
         for (int k = 0; k < size; k++)
         {
-            targetImg.at<Vec3b>(pixelY, pixelX + temp) = tile.at<Vec3b>(i, temp);
+            mosaicImg.at<Vec3b>(pixelY, pixelX + temp) = (1 - transparency) * tile.at<Vec3b>(i, temp) + transparency * targetImg.at<Vec3b>(pixelY, pixelX + temp);
             temp++;
             if (temp == breakpoint)
             {
