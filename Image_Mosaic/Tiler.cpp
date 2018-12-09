@@ -15,7 +15,7 @@ int Tiler(Mat mosaicImg, string readpath, string defaultpath, string savepath)
     string path = readpath + "Resource/";
     string filePath = defaultpath + "data.csv";
     
-    Mat targetImg = imread(readpath + "25*25Edgeborder.jpg");
+    Mat targetImg = imread(readpath + "EdgeBorder/25*25Edgeborder.jpg");
 
     vector<string> tiles;
     vector<Vec3b> averages;

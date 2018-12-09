@@ -18,10 +18,10 @@ int ImageCutter(Mat targetImage)
 
     //mosaic target image
     Mat borderImg = edgeBorder(tempImg);
-    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/25*25EdgeBorder.jpg", borderImg);
+    imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/EdgeBorder/25*25EdgeBorder.jpg", borderImg);
     printf("The edge of the target image has been bordered.\n" );
     
-    borderImg = imread("/Users/wangannan/Image_Mosaic/IMG/Input/25*25EdgeBorder.jpg");
+    borderImg = imread("/Users/wangannan/Image_Mosaic/IMG/Input/EdgeBorder/25*25EdgeBorder.jpg");
     
     int height = borderImg.rows;
     int width = borderImg.cols;
@@ -34,14 +34,6 @@ int ImageCutter(Mat targetImage)
     
     return 0;
 } // ImageCutter
-
-Mat resizer(Mat targetImg, int col, int row)
-{
-    Mat tempImg;
-
-    resize(targetImg, tempImg, Size(row, col));
-    return tempImg;
-} // resizer
 
 Mat edgeBorder(Mat targetImg)
 {
