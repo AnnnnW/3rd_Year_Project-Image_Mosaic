@@ -15,7 +15,7 @@ vector<Mat> hsvSplit;
 int ImageCutter(Mat targetImage)
 {
     Mat tempImg = targetImage;
-
+    
     //mosaic target image
     Mat borderImg = edgeBorder(tempImg);
     imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/EdgeBorder/25*25EdgeBorder.jpg", borderImg);
@@ -23,13 +23,19 @@ int ImageCutter(Mat targetImage)
     
     borderImg = imread("/Users/wangannan/Image_Mosaic/IMG/Input/EdgeBorder/25*25EdgeBorder.jpg");
     
+    if (!borderImg.data)
+    {
+        printf("Can't read the border image, please check the path and try again.\n");
+        return -1;
+    }
+    
     int height = borderImg.rows;
     int width = borderImg.cols;
-
+    
     tempImg = mosaicFilter(borderImg, height, width);
     imwrite("/Users/wangannan/Image_Mosaic/IMG/Input/Cutter/25*25Cutter(masking).jpg", tempImg);
-
-    imshow("Mosaic", tempImg);
+    
+//    imshow("Mosaic", tempImg);
     printf("The mosaic target file has been saved.\n" );
     
     return 0;
@@ -75,7 +81,7 @@ Mat mosaicFilter(Mat targetImg, int height, int width)
             writePixel(SIZE, average, targetImg, pixelY, pixelX, BREAK);
         } // for
     } // for
-
+    
     printf("The target file has been mosaic.\n");
     return targetImg;
 } // mosaicFilter
@@ -131,6 +137,6 @@ Vec3b averageValue( int size, int array[size][RGB])
     rSum = (int)rSum / size;
     
     Vec3b average = {(unsigned char)bSum, (unsigned char)gSum, (unsigned char)rSum};
-        
+    
     return average;
 } // averageValue

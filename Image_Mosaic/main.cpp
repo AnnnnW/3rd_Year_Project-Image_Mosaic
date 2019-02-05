@@ -25,8 +25,8 @@ string savepath = defaultpath + "Output/";
 int main()
 {
     Mat targetImage = imread(readpath + "testing_image.jpg");             // Load the image
-//    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
-
+    //    Mat targetImage = imread(readpath + "C3FDFBFA-AFE0-4F06-8093-8C8C005D6B75-1277-000000D003A7E724_tmp.jpg");             // Load the image
+    
     if (!targetImage.data)
     {
         printf("Can't read the file, please check the path and try again.\n");
@@ -39,6 +39,11 @@ int main()
     TileAnalyser(readpath, defaultpath);
     
     Mat mosaicImage = imread(readpath + "Cutter/25*25Cutter(masking).jpg");             // Load the image
+    if (!mosaicImage.data)
+    {
+        printf("Can't read the mosaic image, please check the path and try again.\n");
+        return -1;
+    }
     
     Tiler(mosaicImage, readpath, defaultpath, savepath);
     

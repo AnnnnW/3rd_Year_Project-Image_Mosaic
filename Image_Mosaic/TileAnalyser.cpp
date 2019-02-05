@@ -32,16 +32,21 @@ int TileAnalyser(string readpath, string defaultpath)
         if (ptr -> d_name[0] == '.')
             continue;
         tiles.push_back(ptr -> d_name); //add the d_name to the end of the vector
-
+        
         tempImg = imread(path + ptr -> d_name);
+        if (!tempImg.data)
+        {
+            printf("Can't read the file: %s, please check the path and try again.\n", ptr -> d_name);
+            return -1;
+        }
         tempImg = resizer(tempImg, BREAK, BREAK);
         imwrite(readpath + "Resizer/" + ptr -> d_name, tempImg);
         
         readPixel(SIZE, rgbArray, tempImg, 0, 0, BREAK);
-
+        
         averages.push_back(averageValue(SIZE, rgbArray));
         hue.push_back((int)hsvTrans(averageValue(SIZE, rgbArray))[0] * 2);
-
+        
     } // while
     
     // 写入文件
@@ -71,7 +76,7 @@ int writter(struct dirent *ptr, DIR *dir, vector<string> tiles, vector<Vec3b> av
     ofstream outfile;
     outfile.open(defaultpath + "data.csv", ios::out | ios::trunc);          // If the file exist, then set the length to 0 then open
     outfile << "Name,B,G,R,H"  << endl; // 4 columns represent: name, B, G and R value
-
+    
     for (int i = 1; i < tiles.size(); i++)
     {
         if (outfile.is_open())
