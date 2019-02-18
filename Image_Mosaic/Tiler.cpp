@@ -124,15 +124,14 @@ void reader(string filePath, vector<string> &tiles, vector<Vec3b> &averages, vec
     
 } // reader
 
-string::size_type compareHue(Vec3b averageRGB, vector<int> hue)
+int compareHue(Vec3b averageRGB, vector<int> hue)
 {
     int averageHue = (int)hsvTrans(averageRGB)[0] * 2;
     
-    int temp, currentMin = 360;
-    string::size_type bestFitIndex = 0;
+    int temp, currentMin = 360, bestFitIndex = 0;
     int best[3];
     
-    for (string::size_type i = 0; i < hue.size(); i++)
+    for (int i = 0; i < hue.size(); i++)
     {
         temp = abs(hue[i] - averageHue);        // stored as an absolute value, need to be none-negative
         if (currentMin > temp)
