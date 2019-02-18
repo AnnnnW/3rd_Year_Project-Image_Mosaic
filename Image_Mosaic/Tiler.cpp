@@ -131,7 +131,7 @@ int compareHue(Vec3b averageRGB, vector<int> hue)
     int temp, currentMin = 360, bestFitIndex = 0;
     int best[3];
     
-    for (int i = 0; i < hue.size(); i++)
+    for (string::size_type i = 0; i < hue.size(); i++)
     {
         temp = abs(hue[i] - averageHue);        // stored as an absolute value, need to be none-negative
         if (currentMin > temp)
