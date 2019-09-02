@@ -1,33 +1,38 @@
 # 3rd Year Project- the Image Mosaic
-This is my third year project in the University of Manchester.
-There are three parts to process the image:
+This is my third year project in the University of Manchester. The language using is C++ and OpenCV package is used to help with image processing.
+
+There are three parts to generate the image mosaic:
   * Image Analysor
   * Image Cutter
   * Tiler
   
-I call the original image, target image, and for the small pieces to replace is tiles.
+There are three kinds of images in the project: target image is called as the original input image, tiles for the small image pieces to replace, and result image for output image.
   
-  The image Analysor should do these work:
-  - read the images and their names from the directory and write the name into a file
-  - tile images with their average colour and save them in the file,
-  - rezise them with the required size,
-  - read the file and read the data saved in
+  The Image Analyser should do these work:
+  - read tile images and calculate their average colours then save them into a file,
+  - rezise the tiles into a required size,
+  - read the file and save the data into an array
   
-  The image cutter should do these work:
-  - ead the target file 
-  - cut the image using a 9x9 filter
-  - make the 9x9 blocks to be mosaic by using the average RGB colour of the 81 pixels
+  The Image Cutter should:
+  - read the target file 
+  - cut the image into a 9x9 block
+  - mosaic the 9x9 blocks to by using the average RGB colour of the block
   
-  The tiler should do these work:
-  - Read from the file which saved the name and the average colour for each tile images
-  - Compare each average colour with each 9x9 piece
-  - replace the piece with the most similar colour tile
+  The Tiler should do these work:
+  - get all the data calculate in the Image Cutter and the Image Analyser
+  - compare the average colour between the blocks and the tiles
+  - replace the certain block with the its most colour-similar tile image
+  - output the result image mosaic
 
-And after finishing the basic version of this project which can achieve target image cut into 9x9 pieces, the analysor gives the correct average colours of the tiles and replace with the 9x9 pieces,
-I will do following improvements:
+This version is the basic image mosaic generator which can only produce 9x9 block-size image mosaic.
+There are some improvements in the GUI version (see: https://github.com/AnnnnW/ImageMosaicGUI):
 
-for the tiler:
-  * it can also do the colour correction to make the tile more similar to the original piece
-  * implement a better algorithm to choose the most silimar tile
-      - can reduce the replication among tiles
-      - can deal with three best choices. Example: how to choose among: all light blue, half white half dark blue, white background with dark blue dots and so on, which all have the same average colour: light blue.
+* There are no output data file to store the average colours and the image infos. All data is in arrays.
+* A GUI is implemented via Qt package, which can only compatible in MacOS system.
+* The target image and the tile images can be choosed by user, and the path of the images can be seen.
+* A quickview window of the target image and a preview window of the result image is enabled.
+* The result image can be saved in a certain directory.
+* The block size is more flexible, there provides several sizes.
+* An adjustable target image overlay-level is provide.
+* Provide the Unequal-block-size result (still buggy)
+* TBC...
